@@ -17,13 +17,6 @@ def bn_upconv_relu(input, filters, bachnorm_momentum, **conv2d_trans_args):
 def unet_satellite(
     input_shape,    
     output_activation='sigmoid',
-    #use_batch_norm=True, 
-    #upsample_mode='DECONV', 
-    #use_dropout=True, 
-    #use_dropout_on_upsampling=False, 
-    #dropout=0.1, 
-    #dropout_change_per_layer=0.0,
-    #filters=16,
     num_layers=4
 ):
     inputs = Input(input_shape)   
