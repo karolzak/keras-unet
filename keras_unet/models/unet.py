@@ -10,8 +10,7 @@ def upsample_simple(filters, kernel_size, strides, padding):
 def conv2d_block(
     inputs, 
     use_batch_norm=True, 
-    use_dropout=True, 
-    dropout=0.5, 
+    dropout=0.3, 
     filters=16, 
     kernel_size=(3,3), 
     activation='relu', 
@@ -21,10 +20,10 @@ def conv2d_block(
     c = Conv2D(filters, kernel_size, activation=activation, kernel_initializer=kernel_initializer, padding=padding) (inputs)
     if use_batch_norm:
         c = BatchNormalization()(c)
-    if use_dropout:
+    if dropout > 0.0:
         c = Dropout(dropout)(c)
     c = Conv2D(filters, kernel_size, activation=activation, kernel_initializer=kernel_initializer, padding=padding) (c)
-    if use_batch_norm:
+    if dropout > 0.0:
         c = BatchNormalization()(c)
     return c
 
@@ -32,7 +31,6 @@ def unet(
     input_shape,
     use_batch_norm=True, 
     upsample_mode='deconv', # 'deconv' or 'simple' 
-    use_dropout=True, 
     use_dropout_on_upsampling=False, 
     dropout=0.3, 
     dropout_change_per_layer=0.0,
@@ -51,20 +49,24 @@ def unet(
 
     down_layers = []
     for l in range(num_layers):
-        x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, use_dropout=use_dropout, dropout=dropout)
+        x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, dropout=dropout)
         down_layers.append(x)
         x = MaxPooling2D((2, 2)) (x)
         dropout += dropout_change_per_layer
         filters = filters*2 # double the number of filters with each layer
 
-    x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, use_dropout=use_dropout, dropout=dropout)
-    use_dropout=use_dropout_on_upsampling
-    
+    x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, dropout=dropout)
+
+    if not use_dropout_on_upsampling:
+        dropout = 0.0
+        dropout_change_per_layer = 0.0
+
     for conv in reversed(down_layers):        
-        filters //= 2 # decreasing number of filters with each layer    
+        filters //= 2 # decreasing number of filters with each layer 
+        dropout -= dropout_change_per_layer
         x = upsample(filters, (2, 2), strides=(2, 2), padding='same') (x)
         x = concatenate([x, conv])
-        x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, use_dropout=use_dropout, dropout=dropout)
+        x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, dropout=dropout)
     
     outputs = Conv2D(1, (1, 1), activation=output_activation) (x)    
     
