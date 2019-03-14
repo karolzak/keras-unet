@@ -1,12 +1,4 @@
-from keras_unet.metrics import dice_coef, iou
-
-
-def dice_coef_loss(y_true, y_pred):
-    return -dice_coef(y_true, y_pred)
-
-
-def iou_loss(y_true, y_pred):
-    return -iou(y_true, y_pred)
+from keras import backend as K
 
 
 def jaccard_distance(y_true, y_pred, smooth=100):
