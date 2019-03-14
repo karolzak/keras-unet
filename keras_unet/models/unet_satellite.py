@@ -15,10 +15,11 @@ def bn_upconv_relu(input, filters, bachnorm_momentum, **conv2d_trans_args):
     return x
 
 def unet_satellite(
-    input_shape,    
+    input_shape,
+    num_classes=1,
     output_activation='sigmoid',
-    num_layers=4
-):
+    num_layers=4):
+
     inputs = Input(input_shape)   
     
     filters = 64
@@ -86,7 +87,7 @@ def unet_satellite(
     x = bn_conv_relu(x, upconv_filters, bachnorm_momentum, **conv2d_args)
     x = bn_conv_relu(x, filters, bachnorm_momentum, **conv2d_args)
            
-    outputs = Conv2D(1, kernel_size=(1,1), strides=(1,1), activation=output_activation, padding='valid') (x)       
+    outputs = Conv2D(num_classes, kernel_size=(1,1), strides=(1,1), activation=output_activation, padding='valid') (x)       
     
     model = Model(inputs=[inputs], outputs=[outputs])
     return model

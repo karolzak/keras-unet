@@ -29,6 +29,7 @@ def conv2d_block(
 
 def unet(
     input_shape,
+    num_classes=1,
     use_batch_norm=True, 
     upsample_mode='deconv', # 'deconv' or 'simple' 
     use_dropout_on_upsampling=False, 
@@ -68,7 +69,7 @@ def unet(
         x = concatenate([x, conv])
         x = conv2d_block(inputs=x, filters=filters, use_batch_norm=use_batch_norm, dropout=dropout)
     
-    outputs = Conv2D(1, (1, 1), activation=output_activation) (x)    
+    outputs = Conv2D(num_classes, (1, 1), activation=output_activation) (x)    
     
     model = Model(inputs=[inputs], outputs=[outputs])
     return model
