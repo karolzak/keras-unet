@@ -8,6 +8,13 @@ def iou(y_true, y_pred, smooth=1.):
     intersection = K.sum(y_true_f * y_pred_f)
     return (intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection + smooth)
 
+    
+def jaccard_coef(y_true, y_pred):
+    intersection = K.sum(y_true * y_pred)
+    union = K.sum(y_true + y_pred)
+    jac = (intersection + 1.) / (union - intersection + 1.)
+    return K.mean(jac)
+
 
 def threshold_binarize(x, threshold=0.5):
     ge = tf.greater_equal(x, tf.constant(threshold))
