@@ -23,7 +23,7 @@ def conv2d_block(
     if dropout > 0.0:
         c = Dropout(dropout)(c)
     c = Conv2D(filters, kernel_size, activation=activation, kernel_initializer=kernel_initializer, padding=padding) (c)
-    if dropout > 0.0:
+    if use_batch_norm:
         c = BatchNormalization()(c)
     return c
 
