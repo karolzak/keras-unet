@@ -108,3 +108,5 @@ venv.bak/
 
 # inputs
 input/*
+
+*.h5
