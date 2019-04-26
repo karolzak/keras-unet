@@ -107,6 +107,6 @@ venv.bak/
 .vscode
 
 # inputs
-input/*
+input/whales
 
 *.h5
