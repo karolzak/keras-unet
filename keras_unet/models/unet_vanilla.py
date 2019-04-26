@@ -6,7 +6,7 @@ from .unet import conv2d_block
 def unet_vanilla(
     input_shape,
     num_classes=1,
-    dropout=0.3, 
+    dropout=0.5, 
     filters=64,
     num_layers=4,
     output_activation='sigmoid'): # 'sigmoid' or 'softmax'
@@ -29,7 +29,7 @@ def unet_vanilla(
         filters //= 2 # decreasing number of filters with each layer 
         x = Conv2DTranspose(filters, (2, 2), strides=(2, 2), padding='valid') (x)
         
-        ch, cw = get_crop_shape(int_shape(conv),int_shape(x))
+        ch, cw = get_crop_shape(int_shape(conv), int_shape(x))
         conv = Cropping2D(cropping=(ch, cw))(conv)
 
         x = concatenate([x, conv])
