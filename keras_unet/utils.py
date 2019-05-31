@@ -187,3 +187,79 @@ def get_cmap(arr):
             return 'rgb'
         elif arr.shape[3] == 1:
             return 'gray'
+        
+
+def get_patches(img_arr, size=256, stride=256):
+    '''
+    Takes single image or array of images and returns
+    crops using sliding window method.
+    If stride < size it will do overlapping.
+    '''
+    # check size and stride
+    if size % stride != 0: 
+        raise ValueError('size % stride must be equal 0')
+        
+        
+    patches_list = []
+    overlapping = 0    
+    if stride != size:
+        overlapping = (size // stride) - 1
+    
+    if img_arr.ndim == 3:    
+        i_max = img_arr.shape[0] // stride-overlapping
+
+        for i in range(i_max):
+            for j in range(i_max):
+                #print(i*stride, i*stride+size)
+                #print(j*stride, j*stride+size)
+                patches_list.append(
+                    img_arr[i*stride:i*stride+size,
+                            j*stride:j*stride+size
+                           ])
+                
+    elif img_arr.ndim == 4:
+        i_max = img_arr.shape[1] // stride - overlapping
+        for im in img_arr:
+            for i in range(i_max):
+                for j in range(i_max):
+                    #print(i*stride, i*stride+size)
+                    #print(j*stride, j*stride+size)
+                    patches_list.append(
+                        im[i*stride:i*stride+size,
+                           j*stride:j*stride+size
+                          ])
+                    
+    else:
+        raise ValueError('img_arr.ndim must be equal 3 or 4')
+    
+    return np.stack(patches_list)
+        
+
+########################
+
+def reconstruct_from_patches(img_arr, target_shape=(1024,1024,1), i_max=7, stride=128, size=256):
+    nm_images = img_arr.shape[0] // (i_max**2)    
+    
+    averaging_value = (size//stride)
+    images_list = []    
+    kk = 0
+    for img_count in range(nm_images):
+        img_bg = np.zeros(target_shape, dtype=np.float32)
+        for i in range(i_max):
+            for j in range(i_max):
+                img_bg[i*stride:i*stride+size, j*stride:j*stride+size] += img_arr[kk] / averaging_value
+                #img_bg[i*stride:i*stride+size, j*stride:j*stride+size] /= 2 # average
+                kk += 1        
+    
+        # average some more because overlapping 4 patches
+        img_bg[stride:i_max*stride, stride:i_max*stride] /= averaging_value
+        # corners:
+        img_bg[0:stride, 0:stride] *= averaging_value
+        img_bg[i_max*stride:i_max*stride+stride, 0:stride] *= averaging_value
+        img_bg[i_max*stride:i_max*stride+stride, i_max*stride:i_max*stride+stride] *= averaging_value
+        img_bg[0:stride, i_max*stride:i_max*stride+stride] *= averaging_value
+        
+        images_list.append(img_bg)
+        
+    return np.stack(images_list)
+
