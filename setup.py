@@ -2,7 +2,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 setup(name='keras-unet',
-      version='0.0.4',
+      version='0.0.5',
       description='U-Net model for semantic segmentation implementation in Keras + useful utility functions for semantic segmentation tasks',
       url='http://github.com/karolzak/keras-unet',
       author='Karol Zak',
