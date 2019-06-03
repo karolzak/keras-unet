@@ -184,7 +184,7 @@ def get_cmap(arr):
         return 'gray'
     elif arr.ndim == 4:
         if arr.shape[3] == 3:
-            return 'rgb'
+            return 'jet'
         elif arr.shape[3] == 1:
             return 'gray'
         
