@@ -16,7 +16,11 @@ Helpers package for semantic segmentation tasks using U-Net models implemented i
 - [x] Notebooks (examples):
     - [x] Training custom U-Net for whale tails segmentation example
     - [ ] Semantic segmentation for satellite images
-    - [ ] Semantic segmentation for medical images
+    - [x] Semantic segmentation for medical images
 
+### Installation:
+```bash
+pip install git+https://github.com/karolzak/keras-unet
+```
 
 
