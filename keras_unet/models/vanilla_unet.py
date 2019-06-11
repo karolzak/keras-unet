@@ -1,9 +1,9 @@
 from keras.models import Model
 from keras.backend import int_shape
 from keras.layers import BatchNormalization, Conv2D, Conv2DTranspose, MaxPooling2D, Dropout, Input, concatenate, Cropping2D
-from .unet import conv2d_block
+from .custom_unet import conv2d_block
 
-def unet_vanilla(
+def vanilla_unet(
     input_shape,
     num_classes=1,
     dropout=0.5, 

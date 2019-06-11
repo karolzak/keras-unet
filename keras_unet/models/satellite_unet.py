@@ -14,7 +14,7 @@ def bn_upconv_relu(input, filters, bachnorm_momentum, **conv2d_trans_args):
     x = Conv2DTranspose(filters, **conv2d_trans_args)(x)
     return x
 
-def unet_satellite(
+def satellite_unet(
     input_shape,
     num_classes=1,
     output_activation='sigmoid',
