@@ -267,29 +267,51 @@ def plot_patches(img_arr, org_img_size, stride=None, size=None):
 
 ########################
 
-def reconstruct_from_patches(img_arr, target_shape=(1024,1024,1), i_max=7, stride=128, size=256):
-    nm_images = img_arr.shape[0] // (i_max**2)    
+def reconstruct_from_patches(img_arr, org_img_size, stride=None, size=None):
+    # check parameters
+    if type(org_img_size) is not tuple:
+        raise ValueError('org_image_size must be a tuple')
+        
+    if img_arr.ndim == 3:
+        img_arr = np.expand_dims(img_arr, axis=0)
+        
+    if size is None:
+        size = img_arr.shape[1]
+        
+    if stride is None:
+        stride = size
+        
+    nm_layers = img_arr.shape[3]
     
+    i_max = (org_img_size[0] // stride) + 1 - (size // stride)
+    j_max = (org_img_size[1] // stride) + 1 - (size // stride)
+    
+    total_nm_images = (img_arr.shape[0]//(i_max**2))
+    nm_images = img_arr.shape[0]
+        
     averaging_value = (size//stride)
     images_list = []    
     kk = 0
-    for img_count in range(nm_images):
-        img_bg = np.zeros(target_shape, dtype=np.float32)
-        for i in range(i_max):
-            for j in range(i_max):
-                img_bg[i*stride:i*stride+size, j*stride:j*stride+size] += img_arr[kk] / averaging_value
-                #img_bg[i*stride:i*stride+size, j*stride:j*stride+size] /= 2 # average
-                kk += 1        
-    
-        # average some more because overlapping 4 patches
-        img_bg[stride:i_max*stride, stride:i_max*stride] /= averaging_value
-        # corners:
-        img_bg[0:stride, 0:stride] *= averaging_value
-        img_bg[i_max*stride:i_max*stride+stride, 0:stride] *= averaging_value
-        img_bg[i_max*stride:i_max*stride+stride, i_max*stride:i_max*stride+stride] *= averaging_value
-        img_bg[0:stride, i_max*stride:i_max*stride+stride] *= averaging_value
+    for img_count in range(total_nm_images):
+        img_bg = np.zeros((org_img_size[0], org_img_size[1], nm_layers), dtype=img_arr[0].dtype)
         
+        for i in range(i_max):
+            for j in range(j_max):
+                for layer in range(nm_layers):
+                    img_bg[i*stride:i*stride+size, j*stride:j*stride+size, layer] = img_arr[kk,:,:,layer]
+                    
+                kk += 1        
+        # TODO add averaging for masks - right now it's just overwritting
+        
+#         for layer in range(nm_layers):
+#             # average some more because overlapping 4 patches
+#             img_bg[stride:i_max*stride, stride:i_max*stride, layer] //= averaging_value
+#             # corners:
+#             img_bg[0:stride, 0:stride, layer] *= averaging_value
+#             img_bg[i_max*stride:i_max*stride+stride, 0:stride, layer] *= averaging_value
+#             img_bg[i_max*stride:i_max*stride+stride, i_max*stride:i_max*stride+stride, layer] *= averaging_value
+#             img_bg[0:stride, i_max*stride:i_max*stride+stride, layer] *= averaging_value
+
         images_list.append(img_bg)
         
     return np.stack(images_list)
-
