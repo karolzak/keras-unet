@@ -1,22 +1,23 @@
 # About
-Helpers package for semantic segmentation tasks using U-Net models implemented in Keras.
-
-# Features:           
-- [x] Vanilla U-Net implementation based on [the original paper](https://arxiv.org/pdf/1505.04597.pdf)
-- [x] Customizable U-Net:
-    - [x] batch norm or/and dropout
-    - [x] number of starting filters
-    - [x] number of "unet" conv layers
-- [x] U-Net optimized for satellite images based on [DeepSense.AI Kaggle competition entry](https://deepsense.ai/deep-learning-for-satellite-imagery-via-image-segmentation/)
-- [x] Utils:
-    - [x] Plotting images and masks
+Helper package with multiple U-Net implementations in Keras as well as useful utility tools helpful when working with image segmentation tasks
+      
+# Features: 
+- [x] U-Net models implemented in Keras          
+    - [x] Vanilla U-Net implementation based on [the original paper](https://arxiv.org/pdf/1505.04597.pdf)
+    - [x] Customizable U-Net
+    - [x] U-Net optimized for satellite images based on [DeepSense.AI Kaggle competition entry](https://deepsense.ai/deep-learning-for-satellite-imagery-via-image-segmentation/)
+- [x] Utility functions:
+    - [x] Plotting images and masks with overlay
     - [x] Plotting images masks and predictions with overlay (prediction on top of original image)
-    - [x] Plotting training history
+    - [x] Plotting training history for metrics and losses
+    - [x] Cropping smaller patches out of bigger image (e.g. satellite imagery) using sliding window technique (also with overlap if needed)
+    - [x] Plotting smaller patches to visualize the cropped big image
+    - [x] Reconstructing smaller patches back to a big image
     - [x] Data augmentation helper function
 - [x] Notebooks (examples):
-    - [x] Training custom U-Net for whale tails segmentation example
+    - [x] Training custom U-Net for whale tails segmentation
     - [ ] Semantic segmentation for satellite images
-    - [x] Semantic segmentation for medical images
+    - [x] Semantic segmentation for medical images [ISBI challenge 2015](https://biomedicalimaging.org/2015/program/isbi-challenges/)
 
 # Installation:
 ```bash
@@ -35,47 +36,56 @@ pip install git+https://github.com/karolzak/keras-unet
     - [Get smaller patches/crops from bigger image](#Get-smaller-patches/crops-from-bigger-image)    
     - [Plot small patches into single big image](#Plot-small-patches-into-single-big-image)  
     - [Reconstruct a bigger image from smaller patches/crops](#Reconstruct-a-bigger-image-from-smaller-patches/crops)
-
+<br>
 
 ### Vanilla U-Net
 
-[work in progress]
+[Model scheme can be viewed here](docs/vanilla_unet.png)
 
 ```python
-from keras_unet.models import unet_vanilla
+from keras_unet.models import vanilla_unet
 
-model = unet_vanilla.unet_vanilla(input_shape=(512,512,3))
+model = vanilla_unet(input_shape=(512, 512, 3))
 ```
 
 [[back to usage examples]](#usage-examples)
 
+<br>
+
 ### Customizable U-Net 
 
-[work in progress]
+[Model scheme can be viewed here](docs/custom_unet.png)
 
 ```python
-from keras_unet.models import unet
+from keras_unet.models import custom_unet
 
-model = unet.unet(
-    input_shape=(512,512,3),
+model = custom_unet(
+    input_shape=(512, 512, 3),
     use_batch_norm=False,
     num_classes=1,
     filters=64,
     dropout=0.2,
     output_activation='sigmoid')
 ```
+
+
 [[back to usage examples]](#usage-examples)
+
+<br>
 
 ### U-Net for satellite images
+[Model scheme can be viewed here](docs/satellite_unet.png)
 
-[work in progress]
 ```python
-from keras_unet.models import unet_satellite
+from keras_unet.models import satellite_unet
 
-model = unet_satellite.unet_satellite(input_shape=(512,512,3))
+model = satellite_unet(input_shape=(512, 512, 3))
 ```
 
+
 [[back to usage examples]](#usage-examples)
+
+<br>
 
 ### Plot training history 
 
@@ -91,10 +101,12 @@ plot_segm_history(
 ```
 
 Output:    
-![plotted images, masks and predictions](docs/metric_history.png)
-![plotted images, masks and predictions](docs/loss_history.png)
+![metric history](docs/metric_history.png)
+![loss history](docs/loss_history.png)
 
 [[back to usage examples]](#usage-examples)
+
+<br>
 
 ### Plot images and segmentation masks
 
@@ -113,6 +125,8 @@ Output:
 
 
 [[back to usage examples]](#usage-examples)
+
+<br>
 
 ### Get smaller patches/crops from bigger image
 
@@ -141,6 +155,8 @@ x_crops shape:  (100, 100, 100, 3)
 
 [[back to usage examples]](#usage-examples)
 
+<br>
+
 ### Plot small patches into single big image
 
 ```python
@@ -157,9 +173,11 @@ Output:
 ```output
 x_crops shape:  (100, 100, 100, 3)
 ```
-![plotted images, masks and predictions](docs/plotted_patches.png)
+![plotted patches](docs/plotted_patches.png)
 
 [[back to usage examples]](#usage-examples)
+
+<br>
 
 ### Reconstruct a bigger image from smaller patches/crops 
 
@@ -185,7 +203,7 @@ Output:
 x_crops shape:  (100, 100, 100, 3)
 x_reconstructed shape:  (1, 1000, 1000, 3)
 ```
-![plotted images, masks and predictions](docs/reconstructed_image.png)
+![reconstructed image](docs/reconstructed_image.png)
 
 [[back to usage examples]](#usage-examples)
 
