@@ -23,6 +23,10 @@ Helper package with multiple U-Net implementations in Keras as well as useful ut
 ```bash
 pip install git+https://github.com/karolzak/keras-unet
 ```
+or
+```bash
+pip install keras-unet
+```
 
 # Usage examples:
 
