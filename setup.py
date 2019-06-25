@@ -1,9 +1,14 @@
 from setuptools import setup
 from setuptools import find_packages
 
+with open('README.md') as f:
+    long_description = f.read()
+
 setup(name='keras-unet',
-      version='0.0.6',
+      version='0.0.7',
       description='Helper package with multiple U-Net implementations in Keras as well as useful utility tools helpful when working with image segmentation tasks',
+      long_description=long_description,
+      long_description_content_type='text/markdown',  # This is important!
       url='http://github.com/karolzak/keras-unet',
       author='Karol Zak',
       author_email='karol.zak@hotmail.com',
