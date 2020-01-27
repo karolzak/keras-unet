@@ -5,3 +5,6 @@ from . import losses
 from . import metrics
 from . import metrics_np
 from . import utils
+
+__version__ = "0.0.8"
+# TODO add __all__
