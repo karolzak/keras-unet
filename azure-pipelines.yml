@@ -25,10 +25,10 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
-- script: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-  displayName: 'Install dependencies'
+# - script: |
+#     python -m pip install --upgrade pip
+#     pip install -r requirements.txt
+#   displayName: 'Install dependencies'
 
 # - script: |
 #     pip install pytest pytest-azurepipelines
@@ -36,13 +36,13 @@ steps:
 #   displayName: 'pytest'
 
 - script: |
-    python3 -m pip install --user --upgrade setuptools wheel
+    # python3 -m pip install --user --upgrade setuptools wheel
     python3 setup.py sdist bdist_wheel
   displayName: 'Install dependencies'
 
 - task: CopyFiles@2
   inputs:
-    contents: 'dist'
+    contents: 'dist\**'
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
