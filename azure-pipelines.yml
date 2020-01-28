@@ -42,7 +42,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    contents: '**\dist\**'
+    contents: '**'
     targetFolder: $(Build.ArtifactStagingDirectory)
 - task: PublishBuildArtifacts@1
   inputs:
