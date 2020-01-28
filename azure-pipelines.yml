@@ -16,8 +16,8 @@ strategy:
     #   python.version: '3.5'
     Python36:
       python.version: '3.6'
-    Python37:
-      python.version: '3.7'
+    # Python37:
+    #   python.version: '3.7'
 
 steps:
 - task: UsePythonVersion@0
@@ -34,3 +34,17 @@ steps:
 #     pip install pytest pytest-azurepipelines
 #     pytest
 #   displayName: 'pytest'
+
+- script: |
+    python3 -m pip install --user --upgrade setuptools wheel
+    python3 setup.py sdist bdist_wheel
+  displayName: 'Install dependencies'
+
+- task: CopyFiles@2
+  inputs:
+    contents: 'dist'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: dist
