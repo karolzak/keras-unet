@@ -30,10 +30,10 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+# - script: |
+#     pip install pytest pytest-azurepipelines
+#     pytest
+#   displayName: 'pytest'
 
 - task: CopyFiles@2
   inputs:
