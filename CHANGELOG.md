@@ -2,7 +2,9 @@
 
 - Bumped version to 0.0.8
 - Added support for TF >= 2.0 and solved issue #14 
-- From this point forward `keras-unet` will import `tf.keras` instead of `Keras` when TF >= 2.0 is present.
+- From this point forward `keras-unet` will import `tf.keras` instead of regular `Keras` when TF >= 2.0 is present.
+- Added `color` param to `keras_unet.utils.plot_imgs` function allowing to change the mask color when plotting on top of orginal image. Thanks @muminoff picking that up
+- Added some docs scafoldings for `keras_unet.utils`
 
 27.01.2020 (0.0.7)
 
