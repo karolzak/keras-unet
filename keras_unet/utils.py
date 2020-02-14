@@ -1,6 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.preprocessing.image import ImageDataGenerator
+
+from keras_unet import TF
+if TF:
+    from tensorflow.keras.preprocessing.image import ImageDataGenerator
+else:    
+    from keras.preprocessing.image import ImageDataGenerator
+
 
 # Runtime data augmentation
 def get_augmented(
@@ -265,7 +271,6 @@ def plot_patches(img_arr, org_img_size, stride=None, size=None):
             axes[i, j].set_axis_off()
             jj += 1
 
-########################
 
 def reconstruct_from_patches(img_arr, org_img_size, stride=None, size=None):
     # check parameters

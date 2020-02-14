@@ -1,5 +1,10 @@
-from keras import backend as K
 import tensorflow as tf
+
+from keras_unet import TF
+if TF:
+    from tensorflow.keras import backend as K
+else:    
+    from keras import backend as K
 
 
 def iou(y_true, y_pred, smooth=1.):

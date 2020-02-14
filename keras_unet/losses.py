@@ -1,4 +1,8 @@
-from keras import backend as K
+from keras_unet import TF
+if TF:
+    from tensorflow.keras import backend as K
+else:
+    from keras import backend as K
 
 
 def jaccard_distance(y_true, y_pred, smooth=100):

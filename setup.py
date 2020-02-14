@@ -6,7 +6,7 @@ with open("README.md") as f:
 
 setup(
     name="keras-unet",
-    version="0.0.7",
+    version="0.0.8",
     description="Helper package with multiple U-Net implementations in Keras as well as useful utility tools helpful when working with image segmentation tasks",
     long_description=long_description,
     long_description_content_type="text/markdown",  # This is important!

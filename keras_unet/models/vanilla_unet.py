@@ -1,7 +1,21 @@
-from keras.models import Model
-from keras.backend import int_shape
-from keras.layers import BatchNormalization, Conv2D, Conv2DTranspose, MaxPooling2D, Dropout, Input, concatenate, Cropping2D
+from keras_unet import TF
+if TF:
+    from tensorflow.keras.models import Model
+    from tensorflow.keras.backend import int_shape
+    from tensorflow.keras.layers import (
+        BatchNormalization, Conv2D, Conv2DTranspose,
+        MaxPooling2D, Dropout, Input, concatenate, Cropping2D
+    )
+else:
+    from keras.models import Model
+    from keras.backend import int_shape
+    from keras.layers import (
+        BatchNormalization, Conv2D, Conv2DTranspose,
+        MaxPooling2D, Dropout, Input, concatenate, Cropping2D
+    )
+
 from .custom_unet import conv2d_block
+
 
 def vanilla_unet(
     input_shape,
