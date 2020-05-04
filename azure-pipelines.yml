@@ -35,11 +35,11 @@ steps:
 #     pytest
 #   displayName: 'pytest'
 
-- task: CopyFiles@2
-  inputs:
-    contents: '**'
-    targetFolder: $(Build.ArtifactStagingDirectory)
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: dist
+# - task: CopyFiles@2
+#   inputs:
+#     contents: '**'
+#     targetFolder: $(Build.ArtifactStagingDirectory)
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     pathToPublish: $(Build.ArtifactStagingDirectory)
+#     artifactName: dist
