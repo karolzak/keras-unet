@@ -44,7 +44,7 @@ pip install keras-unet
 
 ### Vanilla U-Net
 
-[Model scheme can be viewed here](docs/vanilla_unet.png)
+[Model scheme can be viewed here](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/vanilla_unet.png)
 
 ```python
 from keras_unet.models import vanilla_unet
@@ -58,7 +58,7 @@ model = vanilla_unet(input_shape=(512, 512, 3))
 
 ### Customizable U-Net 
 
-[Model scheme can be viewed here](docs/custom_unet.png)
+[Model scheme can be viewed here](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/custom_unet.png)
 
 ```python
 from keras_unet.models import custom_unet
@@ -78,7 +78,7 @@ model = custom_unet(
 <br>
 
 ### U-Net for satellite images
-[Model scheme can be viewed here](docs/satellite_unet.png)
+[Model scheme can be viewed here](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/satellite_unet.png)
 
 ```python
 from keras_unet.models import satellite_unet
@@ -105,8 +105,8 @@ plot_segm_history(
 ```
 
 Output:    
-![metric history](docs/metric_history.png)
-![loss history](docs/loss_history.png)
+![metric history](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/metric_history.png)
+![loss history](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/loss_history.png)
 
 [[back to usage examples]](#usage-examples)
 
@@ -125,7 +125,7 @@ plot_imgs(
 ```
 
 Output:    
-![plotted images, masks and predictions](docs/plotted_imgs.png)
+![plotted images, masks and predictions](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/plotted_imgs.png)
 
 
 [[back to usage examples]](#usage-examples)
@@ -177,7 +177,7 @@ Output:
 ```output
 x_crops shape:  (100, 100, 100, 3)
 ```
-![plotted patches](docs/plotted_patches.png)
+![plotted patches](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/plotted_patches.png)
 
 [[back to usage examples]](#usage-examples)
 
@@ -207,7 +207,7 @@ Output:
 x_crops shape:  (100, 100, 100, 3)
 x_reconstructed shape:  (1, 1000, 1000, 3)
 ```
-![reconstructed image](docs/reconstructed_image.png)
+![reconstructed image](https://raw.githubusercontent.com/karolzak/keras-unet/master/docs/reconstructed_image.png)
 
 [[back to usage examples]](#usage-examples)
 
