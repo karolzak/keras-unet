@@ -1,3 +1,4 @@
-setuptools==41.0.1
-numpy==1.16.4
-matplotlib==3.1.1
+setuptools
+numpy
+matplotlib
+tensorflow-cpu
