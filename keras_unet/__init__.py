@@ -1,6 +1,6 @@
 name = "keras_unet"
 
-__version__ = "0.0.8"
+__version__ = "0.1.0"
 # TODO add __all__
 
 # from packaging import version # requires 3rd party package
