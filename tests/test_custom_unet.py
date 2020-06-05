@@ -1,7 +1,14 @@
-from keras_unet.models.custom_unet import conv2d_block, custom_unet
-from keras import backend as K
 import numpy as np
 import pytest
+import sys
+sys.path.append(".")
+sys.path.append("../.")
+from keras_unet.models.custom_unet import conv2d_block, custom_unet
+from keras_unet import TF
+if TF:
+    from tensorflow.keras import backend as K
+else:
+    from keras import backend as K
 
 
 def test_conv2D_block_vanilla():
@@ -45,4 +52,3 @@ def test_custom_unet():
     model.compile("sgd", "binary_crossentropy", ["acc"])
     assert all(model.output_shape) == all((None, 224, 224, 1))
     del model
-
