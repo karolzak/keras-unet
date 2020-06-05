@@ -205,7 +205,7 @@ def plot_imgs(
         cols = 3
 
     fig, axes = plt.subplots(
-        nm_img_to_plot, cols, figsize=(cols * figsize, nm_img_to_plot * figsize)
+        nm_img_to_plot, cols, figsize=(cols * figsize, nm_img_to_plot * figsize), squeeze=False
     )
     axes[0, 0].set_title("original", fontsize=15)
     axes[0, 1].set_title("ground truth", fontsize=15)
