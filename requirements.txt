@@ -2,3 +2,4 @@ setuptools
 numpy
 matplotlib
 tensorflow-cpu
+bump2version
