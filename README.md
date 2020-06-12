@@ -1,3 +1,10 @@
+[![Build](https://github.com/karolzak/keras-unet/workflows/Python%20package/badge.svg)](https://github.com/karolzak/keras-unet/actions?query=workflow%3A%22Python+package%22)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/karolzak/keras-unet/blob/master/LICENSE)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/keras-unet)](https://pypi.org/project/keras-unet/)
+
+**Share**:  
+[![Twitter URL](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2karolzak%2Fkeras-unet)](http://twitter.com/share?text=Check%20out%20Keras-Unet%20Python%20package%20which%20helps%20you%20to%20build%20image%20segmentation%20models%20in%20TF%20and%20Keras&url=https://github.com/karolzak/keras-unet/&hashtags=python,computervision,semanticsegmentation,unet,keras,tensorflow,deeplearning,ML,AI)
+
 # About
 Helper package with multiple U-Net implementations in Keras as well as useful utility tools helpful when working with image segmentation tasks
       
