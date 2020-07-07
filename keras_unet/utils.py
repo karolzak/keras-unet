@@ -65,13 +65,13 @@ def get_augmented(
         # Validation data, no data augmentation, but we create a generator anyway
         X_datagen_val = ImageDataGenerator(**data_gen_args)
         Y_datagen_val = ImageDataGenerator(**data_gen_args)
-        X_datagen_val.fit(X_val, augment=True, seed=seed)
-        Y_datagen_val.fit(Y_val, augment=True, seed=seed)
+        X_datagen_val.fit(X_val, augment=False, seed=seed)
+        Y_datagen_val.fit(Y_val, augment=False, seed=seed)
         X_val_augmented = X_datagen_val.flow(
-            X_val, batch_size=batch_size, shuffle=True, seed=seed
+            X_val, batch_size=batch_size, shuffle=False, seed=seed
         )
         Y_val_augmented = Y_datagen_val.flow(
-            Y_val, batch_size=batch_size, shuffle=True, seed=seed
+            Y_val, batch_size=batch_size, shuffle=False, seed=seed
         )
 
         # combine generators into one which yields image and masks
