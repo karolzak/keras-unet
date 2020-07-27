@@ -167,28 +167,27 @@ def mask_to_rgba(mask, color="red"):
 
 
 def plot_imgs(
-    org_imgs,
-    mask_imgs,
-    pred_imgs=None,
-    nm_img_to_plot=10,
-    figsize=4,
-    alpha=0.5,
-    color="red",
-):
+        org_imgs,
+        mask_imgs,
+        pred_imgs=None,
+        nm_img_to_plot=10,
+        figsize=4,
+        alpha=0.5,
+        color="red"):
     """
     Image plotting for semantic segmentation data.
     Last column is always an overlay of ground truth or prediction
     depending on what was provided as arguments.
-    
+
     Args:
-        org_imgs (numpy.ndarray): [description]
-        mask_imgs (numpy.ndarray): [description]
-        pred_imgs (numpy.ndarray, optional): [description]. Defaults to None.
-        nm_img_to_plot (int, optional): [description]. Defaults to 10.
-        figsize (int, optional): [description]. Defaults to 4.
-        alpha (float, optional): [description]. Defaults to 0.5.
-        color (str, optional): [description]. Defaults to "red".
-    """
+        org_imgs (numpy.ndarray): Array of arrays representing a collection of original images.
+        mask_imgs (numpy.ndarray): Array of arrays representing a collection of mask images (grayscale).
+        pred_imgs (numpy.ndarray, optional): Array of arrays representing a collection of prediction masks images.. Defaults to None.
+        nm_img_to_plot (int, optional): How many images to display. Takes first N images. Defaults to 10.
+        figsize (int, optional): Matplotlib figsize. Defaults to 4.
+        alpha (float, optional): Transparency for mask overlay on original image. Defaults to 0.5.
+        color (str, optional): Color for mask overlay. Defaults to "red".
+    """ # NOQA E501
     assert(color in MASK_COLORS)
 
     if nm_img_to_plot > org_imgs.shape[0]:
@@ -369,7 +368,7 @@ def plot_patches(img_arr, org_img_size, stride=None, size=None):
         org_img_size (tuple): [description]
         stride ([type], optional): [description]. Defaults to None.
         size ([type], optional): [description]. Defaults to None.
-    
+
     Raises:
         ValueError: [description]
     """
