@@ -1,6 +1,7 @@
 [![Build](https://github.com/karolzak/keras-unet/workflows/Python%20package/badge.svg)](https://github.com/karolzak/keras-unet/actions?query=workflow%3A%22Python+package%22)
 [![PyPI - version](https://img.shields.io/pypi/v/keras-unet.svg "PyPI version")](https://pypi.org/project/keras-unet/) 
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/keras-unet)](https://pypi.org/project/keras-unet/)
+[![Downloads](https://pepy.tech/badge/keras-unet)](https://pepy.tech/project/keras-unet)
+[![Downloads/Month](https://pepy.tech/badge/keras-unet/month)](https://pepy.tech/project/keras-unet/month)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/karolzak/keras-unet/blob/master/LICENSE)
 <!-- ![Python versions](https://img.shields.io/pypi/pyversions/keras-unet "Supported Python versions") -->
 
