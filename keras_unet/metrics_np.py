@@ -4,14 +4,14 @@ import numpy as np
 def iou_np(y_true, y_pred, smooth=1.):
     intersection = y_true * y_pred
     union = y_true + y_pred
-    return np.sum(intersection + smooth) / np.sum(union - intersection + smooth)
+    return (np.sum(intersection) + smooth) / (np.sum(union - intersection) + smooth)
 
 
 def iou_thresholded_np(y_true, y_pred, threshold=0.5, smooth=1.):
     y_pred_pos = (y_pred > threshold) * 1.0
     intersection = y_true * y_pred_pos
     union = y_true + y_pred_pos
-    return np.sum(intersection + smooth) / np.sum(union - intersection + smooth)
+    return (np.sum(intersection) + smooth) / (np.sum(union - intersection) + smooth)
 
 
 def iou_thresholded_np_imgwise(y_true, y_pred, threshold=0.5, smooth=1.):
@@ -20,4 +20,4 @@ def iou_thresholded_np_imgwise(y_true, y_pred, threshold=0.5, smooth=1.):
     y_pred_pos = (y_pred > threshold) * 1.0
     intersection = y_true * y_pred_pos   
     union = y_true + y_pred_pos
-    return np.sum(intersection + smooth, axis=1) / np.sum(union - intersection + smooth, axis=1)
+    return (np.sum(intersection, axis=1) + smooth) / (np.sum(union - intersection, axis=1) + smooth)
